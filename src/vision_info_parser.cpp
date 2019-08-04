@@ -3,8 +3,26 @@
 namespace vision_info_parser
 {
     /**
-    * @brief Validate and parse XML file.
-    * @return If validate returns true, XML file is validate.
+     * @brief Constructor
+     * 
+     */
+    VisionInfoParser::VisionInfoParser()
+    {
+
+    }
+
+    /**
+     * @brief Constructor
+     * 
+     */
+    VisionInfoParser::VisionInfoParser(ros::NodeHandle nh)
+    {
+        nh_ = nh;
+    }
+
+    /**
+    * @brief Validate and parse XML string.
+    * @return If validate returns true, XML string is validate.
     */
     bool VisionInfoParser::parseFromString(std::string xml_string)
     {
@@ -51,5 +69,16 @@ namespace vision_info_parser
         std::ifstream ifs(xml_path);
         std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
         return parseFromString(str);
+    }
+    
+    /**
+    * @brief Validate and parse ROS message
+    * @return If validate returns true, message is validate.
+    */
+    bool VisionInfoParser::parseFromRosMessage(vision_msgs::VisionInfo msg)
+    {
+        std::string xml_string;
+        nh_.param<std::string>(msg.database_location, xml_string, "");
+        return parseFromString(xml_string);
     }
 }

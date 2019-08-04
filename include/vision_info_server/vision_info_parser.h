@@ -21,6 +21,7 @@
 
 // Headers in ROS
 #include <vision_msgs/VisionInfo.h>
+#include <ros/ros.h>
 
 namespace vision_info_parser
 {
@@ -31,8 +32,11 @@ namespace vision_info_parser
     class VisionInfoParser
     {
     public:
+        VisionInfoParser();
+        VisionInfoParser(ros::NodeHandle nh);
         bool parseFromString(std::string xml_string);
         bool parseFromFile(std::string xml_path);
+        bool parseFromRosMessage(vision_msgs::VisionInfo msg);
         inline std::string getClassMetaString()
         {
             return class_meta_str_;
@@ -40,5 +44,6 @@ namespace vision_info_parser
     private:
         boost::optional<std::map<int,std::string> > classes_;
         std::string class_meta_str_;
+        ros::NodeHandle nh_;
     };
 }
