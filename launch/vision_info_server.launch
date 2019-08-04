@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="xml_path" default="$(find vision_info_server)/config/example.xml"/>
+
+    <node pkg="vision_info_server" type="vision_info_server_node" name="vision_info_server_node" output="screen" respawn="false" respawn_delay="0">
+        <param name="xml_path" value="$(arg xml_path)"/>
+    </node>
+</launch>
