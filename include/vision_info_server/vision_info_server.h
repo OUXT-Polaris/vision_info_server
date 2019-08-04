@@ -12,6 +12,9 @@
  * 
  */
 
+// Headers in this package
+#include <vision_info_server/vision_info_parser.h>
+
 // Headers in ROS
 #include <ros/ros.h>
 #include <vision_msgs/VisionInfo.h>
@@ -36,6 +39,7 @@ private:
     bool validate();
     void publish();
     boost::optional<std::map<int,std::string> > classes_;
+    vision_info_parser::VisionInfoParser parser_;
 };
 
 #endif  //VISION_INFO_SERVER_VISION_INFO_SERVER_H_INCLUDED

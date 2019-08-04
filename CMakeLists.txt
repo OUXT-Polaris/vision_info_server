@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
-#  LIBRARIES vision_info_server
+  LIBRARIES vision_info_parser
   CATKIN_DEPENDS roscpp vision_msgs
 #  DEPENDS system_lib
 )
@@ -21,8 +21,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_library(vision_info_parser src/vision_info_parser.cpp)
+target_link_libraries(vision_info_parser ${catkin_LIBRARIES})
+
 add_executable(vision_info_server_node src/vision_info_server_node.cpp src/vision_info_server.cpp)
-target_link_libraries(vision_info_server_node ${catkin_LIBRARIES})
+target_link_libraries(vision_info_server_node ${catkin_LIBRARIES} vision_info_parser)
 add_dependencies(vision_info_server_node ${catkin_EXPORTED_TARGETS})
 
 # install executables
