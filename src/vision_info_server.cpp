@@ -11,6 +11,9 @@
 
 #include <vision_info_server/vision_info_server.h>
 
+/**
+ * @brief Constructor of VisionInfoServer
+ */
 VisionInfoServer::VisionInfoServer(ros::NodeHandle nh,ros::NodeHandle pnh)
 {
     nh_ = nh;
@@ -21,11 +24,19 @@ VisionInfoServer::VisionInfoServer(ros::NodeHandle nh,ros::NodeHandle pnh)
     publish();
 }
 
+/**
+ * @brief Destructor
+ * 
+ */
 VisionInfoServer::~VisionInfoServer()
 {
 
 }
 
+/**
+ * @brief Publish data as ROS message.
+ * 
+ */
 void VisionInfoServer::publish()
 {
     std::ifstream ifs(xml_path_);
@@ -37,6 +48,10 @@ void VisionInfoServer::publish()
     vision_info_pub_.publish(msg);
 }
 
+/**
+ * @brief Validate XML file.
+ * @return If validate returns true, XML file is validate.
+ */
 bool VisionInfoServer::validate()
 {
     using namespace boost::property_tree;
