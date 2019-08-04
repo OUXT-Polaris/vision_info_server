@@ -1,3 +1,14 @@
+/**
+ * @file vision_info_server.cpp
+ * @author Masaya Kataoka (ms.kataoka@gmail.com)
+ * @brief implimentation of VisionInfoServer Class
+ * @version 0.1
+ * @date 2019-08-05
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 #include <vision_info_server/vision_info_server.h>
 
 VisionInfoServer::VisionInfoServer(ros::NodeHandle nh,ros::NodeHandle pnh)

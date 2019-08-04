@@ -1,0 +1,4 @@
+- git:
+    local-name: vision_info_server
+    uri: https://github.com/OUXT-Polaris/vision_info_server.git
+    version:  master

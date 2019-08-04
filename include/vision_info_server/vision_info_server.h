@@ -1,6 +1,17 @@
 #ifndef VISION_INFO_SERVER_VISION_INFO_SERVER_H_INCLUDED
 #define VISION_INFO_SERVER_VISION_INFO_SERVER_H_INCLUDED
 
+/**
+ * @file vision_info_server.h
+ * @author Masaya Kataoka (ms.kataoka@gmail.com)
+ * @brief definition of the VisionInfoServer Class
+ * @version 0.1
+ * @date 2019-08-05
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 // Headers in ROS
 #include <ros/ros.h>
 #include <vision_msgs/VisionInfo.h>
