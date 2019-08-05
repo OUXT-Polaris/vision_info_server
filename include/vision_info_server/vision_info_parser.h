@@ -41,6 +41,10 @@ namespace vision_info_parser
         {
             return class_meta_str_;
         }
+        inline boost::optional<std::map<int,std::string> > getClasses()
+        {
+            return classes_;
+        }
     private:
         boost::optional<std::map<int,std::string> > classes_;
         std::string class_meta_str_;

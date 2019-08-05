@@ -1,3 +1,14 @@
+/**
+ * @file vision_info_parser.cpp
+ * @author Masaya Kataoka (ms.kataoka@gmail.com)
+ * @brief implimentation of Parser class
+ * @version 0.1
+ * @date 2019-08-05
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
+
 #include <vision_info_server/vision_info_parser.h>
 
 namespace vision_info_parser
