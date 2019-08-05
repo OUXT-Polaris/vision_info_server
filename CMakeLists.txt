@@ -23,6 +23,7 @@ include_directories(
 
 add_library(vision_info_parser src/vision_info_parser.cpp)
 target_link_libraries(vision_info_parser ${catkin_LIBRARIES})
+add_dependencies(vision_info_parser ${catkin_EXPORTED_TARGETS})
 
 add_executable(vision_info_server_node src/vision_info_server_node.cpp src/vision_info_server.cpp)
 target_link_libraries(vision_info_server_node ${catkin_LIBRARIES} vision_info_parser)
