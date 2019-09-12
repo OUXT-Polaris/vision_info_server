@@ -19,7 +19,8 @@ VisionInfoServer::VisionInfoServer(ros::NodeHandle nh,ros::NodeHandle pnh)
     nh_ = nh;
     pnh_ = pnh;
     pnh_.param<std::string>("xml_path", xml_path_, "xml_path");
-    ROS_ASSERT(parser_.parseFromFile(xml_path_));
+    bool result = parser_.parseFromFile(xml_path_);
+    ROS_ASSERT(result);
     vision_info_pub_ = pnh_.advertise<vision_msgs::VisionInfo>("vision_info",1,true);
     publish();
 }
