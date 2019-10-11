@@ -30,7 +30,7 @@ target_link_libraries(vision_info_server_node ${catkin_LIBRARIES} vision_info_pa
 add_dependencies(vision_info_server_node ${catkin_EXPORTED_TARGETS})
 
 # install executables
-install(TARGETS vision_info_server_node
+install(TARGETS vision_info_server_node vision_info_parser
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
