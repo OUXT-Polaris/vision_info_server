@@ -21,7 +21,6 @@
 #include <chrono>
 
 // Headers in ROS
-#include <vision_msgs/msg/vision_info.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace vision_info_parser
@@ -33,10 +32,9 @@ namespace vision_info_parser
     class VisionInfoParser
     {
     public:
-        VisionInfoParser(std::shared_ptr<rclcpp::Node> node_ptr);
+        VisionInfoParser();
         bool parseFromString(std::string xml_string);
         bool parseFromFile(std::string xml_path);
-        bool parseFromRosMessage(vision_msgs::msg::VisionInfo msg);
         inline std::string getClassMetaString()
         {
             return class_meta_str_;

@@ -25,6 +25,7 @@
   <exec_depend>rosdoc_lite</exec_depend>
   <exec_depend>rclcpp_lifecycle</exec_depend>
   <exec_depend>lifecycle_msgs</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>

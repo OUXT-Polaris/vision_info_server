@@ -13,14 +13,17 @@
 #include <vision_info_server/vision_info_server.h>
 
 // Headers in ROS
-#include <ros/ros.h>
+#include <rclcpp/rclcpp.hpp>
 
 int main(int argc, char *argv[])
 {
-    ros::init(argc, argv, "vision_info_server_node");
-    ros::NodeHandle nh;
-    ros::NodeHandle pnh("~");
-    VisionInfoServer server(nh,pnh);
-    ros::spin();
+    rclcpp::init(argc, argv);
+    rclcpp::executors::SingleThreadedExecutor exe;
+    rclcpp::NodeOptions options;
+    std::shared_ptr<vision_info_server::VisionInfoServer> vision_info_server_node
+        = std::make_shared<vision_info_server::VisionInfoServer>(options);
+    exe.add_node(vision_info_server_node->get_node_base_interface());
+    exe.spin();
+    rclcpp::shutdown();
     return 0;
 }
