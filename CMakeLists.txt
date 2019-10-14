@@ -1,47 +1,48 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.5)
 project(vision_info_server)
 
-## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+# Default to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  vision_msgs
-)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES vision_info_parser
-  CATKIN_DEPENDS roscpp vision_msgs
-#  DEPENDS system_lib
-)
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+find_package(lifecycle_msgs REQUIRED)
+find_package(vision_msgs REQUIRED)
 
 include_directories(
   include
-  ${catkin_INCLUDE_DIRS}
 )
 
-add_library(vision_info_parser src/vision_info_parser.cpp)
-target_link_libraries(vision_info_parser ${catkin_LIBRARIES})
-add_dependencies(vision_info_parser ${catkin_EXPORTED_TARGETS})
+add_library(vision_info_parser 
+  src/vision_info_parser.cpp)
+ament_target_dependencies(vision_info_parser 
+  rclcpp rclcpp_lifecycle lifecycle_msgs vision_msgs)
 
-add_executable(vision_info_server_node src/vision_info_server_node.cpp src/vision_info_server.cpp)
-target_link_libraries(vision_info_server_node ${catkin_LIBRARIES} vision_info_parser)
-add_dependencies(vision_info_server_node ${catkin_EXPORTED_TARGETS})
+#add_executable(vision_info_server_node 
+#  src/vision_info_server_node.cpp 
+#  src/vision_info_server.cpp)
+#ament_target_dependencies(vision_info_server_node 
+#  rclcpp rclcpp_lifecycle lifecycle_msgs vision_msgs vision_info_parser)
 
-# install executables
-install(TARGETS vision_info_server_node vision_info_parser
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# install executables/libs
+install(TARGETS 
+  #vision_info_server_node 
+  vision_info_parser
+  DESTINATION lib/vision_info_server
 )
 
-# install headers
-install(DIRECTORY include
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+# Install header files
+install(
+  DIRECTORY "include/"
+  DESTINATION include
 )
 
-# install launch files
-install(DIRECTORY launch
-        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-        USE_SOURCE_PERMISSIONS)
+ament_export_include_directories(include)
+ament_package()
