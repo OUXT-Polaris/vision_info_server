@@ -19,9 +19,6 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/publisher.hpp>
 #include <vision_msgs/msg/vision_info.hpp>
-#include <lifecycle_msgs/msg/transition_event.hpp>
-#include <rclcpp_lifecycle/lifecycle_node.hpp>
-#include <rclcpp_lifecycle/lifecycle_publisher.hpp>
 
 // Headers in Boost
 #include <boost/optional.hpp>
@@ -70,25 +67,20 @@ extern "C" {
 
 namespace vision_info_server
 {
-    using LifecycleCallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
-    class VisionInfoServer: public rclcpp_lifecycle::LifecycleNode
+    class VisionInfoServer: public rclcpp::Node
     {
     public:
         VISION_INFO_SERVER_PUBLIC
         explicit VisionInfoServer(const rclcpp::NodeOptions& options);
         ~VisionInfoServer();
         void publish();
-        LifecycleCallbackReturn on_configure(const rclcpp_lifecycle::State &);
-        LifecycleCallbackReturn on_activate(const rclcpp_lifecycle::State &);
-        LifecycleCallbackReturn on_deactivate(const rclcpp_lifecycle::State &);
-        LifecycleCallbackReturn on_cleanup(const rclcpp_lifecycle::State &);
     private:
         std::string xml_path_;
         boost::optional<std::map<int,std::string> > classes_;
         vision_info_parser::VisionInfoParser parser_;
         std::shared_ptr<rclcpp::SyncParametersClient> param_client_ptr_;
         std::string xml_string_;
-        std::shared_ptr<rclcpp_lifecycle::LifecyclePublisher<vision_msgs::msg::VisionInfo> > vision_info_pub_;
+        std::shared_ptr<rclcpp::Publisher<vision_msgs::msg::VisionInfo> > vision_info_pub_;
     };
 }
 
