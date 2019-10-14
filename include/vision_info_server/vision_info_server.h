@@ -67,21 +67,20 @@ extern "C" {
 
 namespace vision_info_server
 {
-    class VisionInfoServer: public rclcpp::Node
-    {
-    public:
-        VISION_INFO_SERVER_PUBLIC
-        explicit VisionInfoServer(const rclcpp::NodeOptions& options);
-        ~VisionInfoServer();
-        void publish();
-    private:
-        std::string xml_path_;
-        boost::optional<std::map<int,std::string> > classes_;
-        vision_info_parser::VisionInfoParser parser_;
-        std::shared_ptr<rclcpp::SyncParametersClient> param_client_ptr_;
-        std::string xml_string_;
-        std::shared_ptr<rclcpp::Publisher<vision_msgs::msg::VisionInfo> > vision_info_pub_;
-    };
+  class VisionInfoServer: public rclcpp::Node
+  {
+  public:
+      VISION_INFO_SERVER_PUBLIC
+      explicit VisionInfoServer(const rclcpp::NodeOptions& options);
+      ~VisionInfoServer();
+  private:
+      std::string xml_path_;
+      boost::optional<std::map<int,std::string> > classes_;
+      vision_info_parser::VisionInfoParser parser_;
+      std::shared_ptr<rclcpp::SyncParametersClient> param_client_ptr_;
+      std::string xml_string_;
+      std::shared_ptr<rclcpp::Publisher<vision_msgs::msg::VisionInfo> > vision_info_pub_;
+  };
 }
 
 #endif  //VISION_INFO_SERVER_VISION_INFO_SERVER_H_INCLUDED
